@@ -15,4 +15,16 @@ void playVexcodeSound(const char *soundName) {
   wait(5, msec);
 }
 
-#pragma endregion VEXcode Generated Robot Configuration
+
+controller Con = controller(primary);
+motor leftMotorA = motor(PORT20, ratio18_1, false);
+motor leftMotorB = motor(PORT11, ratio18_1, false);
+motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
+motor rightMotorA = motor(PORT1, ratio18_1, true);
+motor rightMotorB = motor(PORT10, ratio18_1, true);
+motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
+
+bool RemoteControlCodeEnabled = true;
+
+#pragma end region VEXcode Generated Robot Configuration
