@@ -17,5 +17,5 @@
 
 ## Software TODO
 
-- Controller inpout handler
+- ~~Controller input handler~~
 - Three point claw function
