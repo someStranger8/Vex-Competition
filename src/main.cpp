@@ -7,10 +7,15 @@
 
 #include "vex.h"
 
+// macros
+// NOTE: avoid magic numbers; use macros
+#define FLYWHEEL_SPEED 500
+#define DRIVETRAIN_SPEED 150
+
 using namespace vex;
 
 // Brain should be defined by default
-brain Brain;
+brain Brain; 
 
 
 // Robot configuration code.
@@ -61,6 +66,7 @@ void onevent_Controller1ButtonR2_pressed_0() {
 
 void onevent_ControllerButtonX_pressed_0() {
   flyWheel.spin(reverse);
+  flyWheel.setVelocity(FLYWHEEL_RPM, rpm);
 }
 
 void onevent_ControllerButtonB_pressed_0() {
@@ -68,9 +74,8 @@ void onevent_ControllerButtonB_pressed_0() {
 }
 
 int main() {
-  RightDriveSmart.setVelocity(200, rpm); 
-  LeftDriveSmart.setVelocity(200, rpm); 
-  flyWheel.setVelocity(200, rpm);
+  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
+  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
   
   // movement
   Controller1.ButtonL1.pressed(onevent_Controller1ButtonL1_pressed_0);
@@ -82,7 +87,8 @@ int main() {
   Controller1.ButtonX.pressed(onevent_ControllerButtonX_pressed_0); // start
   Controller1.ButtonB.pressed(onevent_ControllerButtonB_pressed_0); // stop
 
-  printf("\033[30m");
+  // If the program breaks for some reason uncomment the following:
+  // printf("\033[30m");
 
   Brain.Screen.print("Grumio est coquus");
   return 0;
