@@ -1,3 +1,5 @@
 # Vex-Competition
 
 > NOTE: PLEASE DO NOT COMMMIT DIRECTLY TO MAIN BRANCH
+
+:3 nya~!
