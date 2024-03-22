@@ -9,7 +9,7 @@
 
 // macros
 // NOTE: avoid magic numbers; use macros
-#define FLYWHEEL_SPEED 500
+#define FLYWHEEL_RPM 500
 #define DRIVETRAIN_SPEED 150
 
 using namespace vex;
