@@ -16,7 +16,7 @@ int main() {
   printf("%s\n", "music");
   Brain.Screen.print("One must imagine Sisyphus happy");
 
-  fun.setVelocity(15, rpm);
+  fun.setVelocity(20, rpm);
   fun.spin(forward);
 
   return 0;
