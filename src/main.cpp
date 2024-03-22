@@ -98,6 +98,7 @@ void capatalismAtItsPeak() {
 int main() {
   competition Competition = competition();
   Competition.drivercontrol(driver);
+  Competition.autonomous(capatalismAtItsPeak);
 
 
   // If the program breaks for some reason uncomment the following:
