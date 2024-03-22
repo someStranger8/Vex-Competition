@@ -69,8 +69,9 @@ void onevent_ControllerButtonB_pressed_0() {
 }
 
 int main() {
-  RightDriveSmart.setVelocity(150, percent); 
-  LeftDriveSmart.setVelocity(150, percent); 
+  RightDriveSmart.setVelocity(200, rpm); 
+  LeftDriveSmart.setVelocity(200, rpm); 
+  flyWheel.setVelocity(200, rpm);
   
   // movement
   Controller1.ButtonL1.pressed(onevent_Controller1ButtonL1_pressed_0);
