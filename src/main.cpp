@@ -94,7 +94,6 @@ void handleFlywheel() {
 
 void driver() {
   setupDriver(); 
-  
   handleMovement();
   handleFlywheel();
 }
