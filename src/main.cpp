@@ -32,34 +32,34 @@ motor flyWheel = motor(PORT2, ratio18_1, true);
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
 
-// "when Controller1 ButtonL1 pressed" hat block
-void onevent_Controller1ButtonL1_pressed_0() {
-  while (Controller1.ButtonL1.pressing()) {
-    LeftDriveSmart.spin(forward);
-  }
-  LeftDriveSmart.stop();
-}
-
 // "when Controller1 ButtonR1 pressed" hat block
 void onevent_Controller1ButtonR1_pressed_0() {
   while (Controller1.ButtonR1.pressing()) {
-    RightDriveSmart.spin(forward);
-  }
-  RightDriveSmart.stop();
-}
-
-// "when Controller1 ButtonL2 pressed" hat block
-void onevent_Controller1ButtonL2_pressed_0() {
-  while (Controller1.ButtonL2.pressing()) {
     LeftDriveSmart.spin(reverse);
   }
   LeftDriveSmart.stop();
 }
 
+// "when Controller1 ButtonL1 pressed" hat block
+void onevent_Controller1ButtonL1_pressed_0() {
+  while (Controller1.ButtonL1.pressing()) {
+    RightDriveSmart.spin(reverse);
+  }
+  RightDriveSmart.stop();
+}
+
 // "when Controller1 ButtonR2 pressed" hat block
 void onevent_Controller1ButtonR2_pressed_0() {
   while (Controller1.ButtonR2.pressing()) {
-    RightDriveSmart.spin(reverse);
+    LeftDriveSmart.spin(forward);
+  }
+  LeftDriveSmart.stop();
+}
+
+// "when Controller1 ButtonL2 pressed" hat block
+void onevent_Controller1ButtonL2_pressed_0() {
+  while (Controller1.ButtonL2.pressing()) {
+    RightDriveSmart.spin(forward);
   } 
   RightDriveSmart.stop();
 }
@@ -73,7 +73,8 @@ void onevent_ControllerButtonB_pressed_0() {
   flyWheel.stop();
 }
 
-int main() {
+// Driver Control
+void driver() {
   RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
   LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
   
@@ -86,10 +87,22 @@ int main() {
   // fly wheel
   Controller1.ButtonX.pressed(onevent_ControllerButtonX_pressed_0); // start
   Controller1.ButtonB.pressed(onevent_ControllerButtonB_pressed_0); // stop
+}
+
+// Automation
+void capatalismAtItsPeak() {
+  return; // do nothing
+}
+
+
+int main() {
+  competition Competition = competition();
+  Competition.drivercontrol(driver);
+  Competition.autonomous(capatalismAtItsPeak);
+
 
   // If the program breaks for some reason uncomment the following:
   // printf("\033[30m");
-
   Brain.Screen.print("Grumio est coquus");
-  return 0;
+  
 }
