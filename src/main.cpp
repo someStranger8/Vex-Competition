@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -91,14 +92,17 @@ void driver() {
 
 // Automation
 void capatalismAtItsPeak() {
-  return; // do nothing
+  LeftDriveSmart.spin(reverse);
+  RightDriveSmart.spin(reverse);
+  wait(5, seconds);
+  LeftDriveSmart.stop();
+  RightDriveSmart.stop();
 }
 
 
 int main() {
   competition Competition = competition();
   Competition.drivercontrol(driver);
-  Competition.autonomous(capatalismAtItsPeak);
 
 
   // If the program breaks for some reason uncomment the following:
