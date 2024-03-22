@@ -1,5 +1,4 @@
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -62,7 +61,7 @@ void onevent_Controller1ButtonR2_pressed_0() {
 }
 
 void onevent_ControllerButtonX_pressed_0() {
-  flyWheel.spin(forward);
+  flyWheel.spin(reverse);
 }
 
 void onevent_ControllerButtonB_pressed_0() {
