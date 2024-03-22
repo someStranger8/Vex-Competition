@@ -61,7 +61,6 @@ void onevent_Controller1ButtonR2_pressed_0() {
 
 void onevent_ControllerButtonX_pressed_0() {
   flyWheel.spin(reverse);
-  flyWheel.setVelocity(500, rpm);
 }
 
 void onevent_ControllerButtonB_pressed_0() {
