@@ -11,7 +11,7 @@
 // macros
 // NOTE: avoid magic numbers; use macros
 #define FLYWHEEL_RPM 500
-#define DRIVETRAIN_SPEED 150
+#define DRIVETRAIN_SPEED 100
 
 using namespace vex;
 
@@ -112,6 +112,7 @@ void capatalismAtItsPeak() {
 int main() {
   competition Competition = competition();
   Competition.drivercontrol(driver);
+  Competition.autonomous(capatalismAtItsPeak);
 
 
   // If the program breaks for some reason uncomment the following:
