@@ -75,19 +75,28 @@ void onevent_ControllerButtonB_pressed_0() {
 }
 
 // Driver Control
-void driver() {
+void setupDriver() {
   RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
-  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
-  
-  // movement
+  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent);
+}
+
+// Controller
+void handleMovement() {
   Controller1.ButtonL1.pressed(onevent_Controller1ButtonL1_pressed_0);
   Controller1.ButtonR1.pressed(onevent_Controller1ButtonR1_pressed_0);
   Controller1.ButtonL2.pressed(onevent_Controller1ButtonL2_pressed_0);
   Controller1.ButtonR2.pressed(onevent_Controller1ButtonR2_pressed_0);
+}
 
-  // fly wheel
+void handleFlywheel() {
   Controller1.ButtonX.pressed(onevent_ControllerButtonX_pressed_0); // start
   Controller1.ButtonB.pressed(onevent_ControllerButtonB_pressed_0); // stop
+}
+
+void driver() {
+  setupDriver(); 
+  handleMovement();
+  handleFlywheel();
 }
 
 // Automation
@@ -108,5 +117,4 @@ int main() {
   // If the program breaks for some reason uncomment the following:
   // printf("\033[30m");
   Brain.Screen.print("Grumio est coquus");
-  
 }
