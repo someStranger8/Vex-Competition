@@ -1,121 +1,167 @@
 
+
+// file inclusion
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
 
-
+// leave "" separate from <>
 #include "vex.h"
+
 
 // macros
 // NOTE: avoid magic numbers; use macros
-#define FLYWHEEL_RPM 500
+#define FLYWHEEL_SPEED 500
 #define DRIVETRAIN_SPEED 100
 
+// may remove this later idk
 using namespace vex;
 
 // Brain should be defined by default
 brain Brain; 
 
-
 // Robot configuration code.
-controller Controller1 = controller(primary);
-motor leftMotorA = motor(PORT1, ratio18_1, false);
-motor leftMotorB = motor(PORT10, ratio18_1, false);
-motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT11, ratio18_1, true);
-motor rightMotorB = motor(PORT20, ratio18_1, true);
-motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
-motor flyWheel = motor(PORT2, ratio18_1, true);
+controller Controller = controller(primary);
+
+// if bug uncomment
+//bool RemoteControlCodeEnabled = true;
 
 
-// define variable for remote controller enable/disable
-bool RemoteControlCodeEnabled = true;
+class driveTrain() {
 
-// "when Controller1 ButtonR1 pressed" hat block
-void onevent_Controller1ButtonR1_pressed_0() {
-  while (Controller1.ButtonR1.pressing()) {
-    LeftDriveSmart.spin(reverse);
-  }
-  LeftDriveSmart.stop();
+  // Private stuff
+  private:
+    // declare motors
+    motor lA = motor(PORT1, ratio18_1, false);
+    motor lB = motor(PORT10, ratio18_1, false);
+    motor_group left = motor_group(lA, lB);
+    motor rA = motor(PORT11, ratio18_1, true);
+    motor rB = motor(PORT20, ratio18_1, true);
+    motor_group right = motor_group(rA, rB);
+
+    // set velocity
+    right.setVelocity(DRIVETRAIN_SPEED, rpm); 
+    left.setVelocity(DRIVETRAIN_SPEED, rpm);
+
+  // public stuff
+  public:
+
+    /*
+
+      Nick messed up motors so there reversed and inverted
+      Who let this happen?
+    
+    */
+  
+    void right_forward() {
+      while (Controller.ButtonR1.pressing()) {
+        left.spin(reverse);
+      }
+      left.stop();
+    }
+    
+    void left_forward() {
+      while (Controller.ButtonL1.pressing()) {
+        right.spin(reverse);
+      }
+      right.stop();
+    }
+    
+    void right_backward() {
+      while (Controller.ButtonR2.pressing()) {
+        left.spin(forward);
+      }
+      left.stop();
+    }
+    
+    void left_backward() {
+      while (Controller.ButtonL2.pressing()) {
+        right.spin(forward);
+      } 
+      right.stop();
+    }
 }
 
-// "when Controller1 ButtonL1 pressed" hat block
-void onevent_Controller1ButtonL1_pressed_0() {
-  while (Controller1.ButtonL1.pressing()) {
-    RightDriveSmart.spin(reverse);
-  }
-  RightDriveSmart.stop();
-}
 
-// "when Controller1 ButtonR2 pressed" hat block
-void onevent_Controller1ButtonR2_pressed_0() {
-  while (Controller1.ButtonR2.pressing()) {
-    LeftDriveSmart.spin(forward);
-  }
-  LeftDriveSmart.stop();
-}
+class flyWheel {
 
-// "when Controller1 ButtonL2 pressed" hat block
-void onevent_Controller1ButtonL2_pressed_0() {
-  while (Controller1.ButtonL2.pressing()) {
-    RightDriveSmart.spin(forward);
-  } 
-  RightDriveSmart.stop();
-}
+  private:
+    // declare motors
+    motor fly_wheel = motor(PORT2, ratio18_1, true);
+    fly_wheel.setVelocity(FLYWHEEL_SPEED, rpm);
 
-void onevent_ControllerButtonX_pressed_0() {
-  flyWheel.spin(reverse);
-  flyWheel.setVelocity(FLYWHEEL_RPM, rpm);
-}
+  public:
 
-void onevent_ControllerButtonB_pressed_0() {
-  flyWheel.stop();
-}
+    /*
 
-// Driver Control
-void setupDriver() {
-  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
-  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent);
+      Nick messed up motors so there reversed and inverted
+      Who let this happen?
+    
+    */
+
+    void start() {
+      fly_wheel.spin(reverse);
+    }
+    
+    void stop() {
+      fly_wheel.stop();
+    }
+
 }
 
 // Controller
-void handleMovement() {
-  Controller1.ButtonL1.pressed(onevent_Controller1ButtonL1_pressed_0);
-  Controller1.ButtonR1.pressed(onevent_Controller1ButtonR1_pressed_0);
-  Controller1.ButtonL2.pressed(onevent_Controller1ButtonL2_pressed_0);
-  Controller1.ButtonR2.pressed(onevent_Controller1ButtonR2_pressed_0);
+void handle_movement() {
+
+  driveTrain DTClass = driveTrain();
+  
+  Controller1.ButtonL1.pressed(DTClass.left_forward);
+  Controller1.ButtonR1.pressed(DTClass.right_forward);
+  Controller1.ButtonL2.pressed(DTClass.left_backward);
+  Controller1.ButtonR2.pressed(oDTClass.right_backward);
+  
 }
 
-void handleFlywheel() {
-  Controller1.ButtonX.pressed(onevent_ControllerButtonX_pressed_0); // start
-  Controller1.ButtonB.pressed(onevent_ControllerButtonB_pressed_0); // stop
+void handle_fly_wheel() {
+
+  flyWheel flywheel = flyWheel();
+  
+  Controller1.ButtonX.pressed(flywheel.start); // start
+  Controller1.ButtonB.pressed(flywheel.stop); // stop
+  
 }
 
 void driver() {
-  setupDriver(); 
-  handleMovement();
-  handleFlywheel();
+  // why?
+  
+  handle_movement();
+  handle_fly_wheel();
+
 }
 
+
 // Automation
-void capatalismAtItsPeak() {
-  LeftDriveSmart.spin(reverse);
-  RightDriveSmart.spin(reverse);
-  wait(5, seconds);
-  LeftDriveSmart.stop();
-  RightDriveSmart.stop();
+void capatalism_at_its_peak() {  // funny name lol
+  
+  // fix this later
+
+  return;
+  
 }
 
 
 int main() {
+
+  // stuff for competition
   competition Competition = competition();
   Competition.drivercontrol(driver);
-  Competition.autonomous(capatalismAtItsPeak);
-
+  Competition.autonomous(capatalism_at_its_peak);
 
   // If the program breaks for some reason uncomment the following:
   // printf("\033[30m");
+
+  // print funny thing
   Brain.Screen.print("Grumio est coquus");
+  
 }
