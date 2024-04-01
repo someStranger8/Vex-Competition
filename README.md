@@ -1,3 +1,3 @@
-# Vex-Competition
+# Stable
 
-> NOTE: PLEASE DO NOT COMMIT DIRECTLY TO `stable` BRANCH BUT `dev` INSTEAD
+The Stable branch is for tested and stable code. Please commit to `dev` so we can test it before pushing to `stable`.
