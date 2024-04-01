@@ -1,3 +1,3 @@
-# Vex-Competition
+# Release
 
-> NOTE: PLEASE DO NOT COMMIT DIRECTLY TO `stable` BRANCH BUT `dev` INSTEAD
+The `release` branch is the final code for competition. The code has been tested, optimized, and does not contain any bugs or issues.
