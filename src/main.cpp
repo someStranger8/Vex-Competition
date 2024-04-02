@@ -125,7 +125,7 @@ void capatalismAtItsPeak() {
 void random_colors() {
 
   // list of random colors
-  const char* colors[8] = {
+  char* colors[8] = {
     "\033[30m", // black
     "\033[31m", // red
     "\033[32m", // green
@@ -138,7 +138,7 @@ void random_colors() {
 
   srand(time(NULL)); // init random
 
-  printf(colors[rand() % 8]); // <- This just changes color of the terminal
+  printf(colors[rand() % sizeof(colors)]);
   Brain.Screen.print("Grumio est coquus");
 }
 
