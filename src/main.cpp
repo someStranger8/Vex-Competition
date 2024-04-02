@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
-//#include <time.h> // needed for random func
+#include <time.h>
 
 
 #include "vex.h"
