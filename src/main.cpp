@@ -125,7 +125,8 @@ void capatalismAtItsPeak() {
 void random_colors() {
 
   // list of random colors
-  char** colors = (char**)malloc(8 * sizeof(char*));
+  #define SIZEOF_COLORS 8
+  char** colors = (char**)malloc(SIZEOF_COLORS * sizeof(char*));
 
   colors[0] = "\033[30m", // black
   colors[1] = "\033[31m", // red
@@ -141,6 +142,10 @@ void random_colors() {
   printf(colors[rand() % sizeof(colors)]);
   Brain.Screen.print("Grumio est coquus");
 
+  for (int i = 0; i < SIZEOF_COLORS; i++) {
+    free(colors[i]);
+  }
+  
   free(colors);
 }
 
