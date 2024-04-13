@@ -125,21 +125,23 @@ void capatalismAtItsPeak() {
 void random_colors() {
 
   // list of random colors
-  char* colors[8] = {
-    "\033[30m", // black
-    "\033[31m", // red
-    "\033[32m", // green
-    "\033[33m", // yellow
-    "\033[34m", // blue
-    "\033[35m", // purple
-    "\033[36m", // cyan
-    "\033[37m"  // white
-  };
+  char** colors = (char**)malloc(8 * sizeof(char*));
+
+  colors[0] = "\033[30m", // black
+  colors[1] = "\033[31m", // red
+  colors[2] = "\033[32m", // green
+  colors[3] = "\033[33m", // yellow
+  colors[4] = "\033[34m", // blue
+  colors[5] = "\033[35m", // purple
+  colors[6] = "\033[36m", // cyan
+  colors[7] = "\033[37m"  // white
 
   srand(time(NULL)); // init random
 
   printf(colors[rand() % sizeof(colors)]);
   Brain.Screen.print("Grumio est coquus");
+
+  free(colors);
 }
 
 int main(void) {
