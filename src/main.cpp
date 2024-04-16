@@ -23,11 +23,11 @@ brain Brain;
 
 // Robot configuration code.
 controller Controller1 = controller(primary);
-motor leftMotorA = motor(PORT1, ratio18_1, false);
-motor leftMotorB = motor(PORT10, ratio18_1, false);
+motor leftMotorA = motor(PORT11, ratio18_1, false);
+motor leftMotorB = motor(PORT20, ratio18_1, false);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT11, ratio18_1, true);
-motor rightMotorB = motor(PORT20, ratio18_1, true);
+motor rightMotorA = motor(PORT1, ratio18_1, false);
+motor rightMotorB = motor(PORT10, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 motor flyWheel = motor(PORT2, ratio18_1, true);
 
@@ -44,33 +44,33 @@ bool RemoteControlCodeEnabled = true;
 // right move forward
 void r_mf() {
   while (Controller1.ButtonR1.pressing()) {
-    LeftDriveSmart.spin(reverse);
-  }
-  LeftDriveSmart.stop();
-}
-
-// left move forward
-void l_mf() {
-  while (Controller1.ButtonL1.pressing()) {
     RightDriveSmart.spin(reverse);
   }
   RightDriveSmart.stop();
 }
 
+// left move forward
+void l_mf() {
+  while (Controller1.ButtonL1.pressing()) {
+    LeftDriveSmart.spin(reverse);
+  }
+  LeftDriveSmart.stop();
+}
+
 // right move backward
 void r_mb() {
   while (Controller1.ButtonR2.pressing()) {
-    LeftDriveSmart.spin(forward);
+    RightDriveSmart.spin(forward);
   }
-  LeftDriveSmart.stop();
+  RightDriveSmart.stop();
 }
 
 // left move backward
 void l_mb() {
   while (Controller1.ButtonL2.pressing()) {
-    RightDriveSmart.spin(forward);
+    LeftDriveSmart.spin(forward);
   } 
-  RightDriveSmart.stop();
+  LeftDriveSmart.stop();
 }
 
 void flywheel_spin() {
