@@ -8,12 +8,7 @@
 
 
 #include "vex.h"
-
-// macros
-// NOTE: avoid magic numbers; use macros
-#define FLYWHEEL_RPM 600 // make fly wheel 600 rpm instead of 500 (600 is the max rpm)
-#define DRIVETRAIN_SPEED 100
-#define WAIT_TIME 3 // how much delay seconds for automation
+#include "macros.h"
 
 using namespace vex;
 
@@ -123,9 +118,6 @@ void capatalismAtItsPeak() {
 }
 
 void random_colors() {
-
-  // list of random colors
-  #define COLOR_COUNT
 
   char* colors[COLOR_COUNT] = {
     "\033[30m", // black
