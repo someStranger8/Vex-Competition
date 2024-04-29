@@ -1,3 +1,3 @@
-# Release
+# Robotics club
 
-The `release` branch is production ready and for competitions.
+The code for Vex V5 robot.
