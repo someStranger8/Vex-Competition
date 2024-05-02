@@ -117,27 +117,17 @@ void capatalismAtItsPeak() {
   RightDriveSmart.stop();
 }
 
-void random_colors() {
+// display image from sd card
+void display_image(string name) {
+  /*
+    Can use this to draw an image to the screen from sd card:
+    Brain.Screen.drawImageFromFile(name, x, y);
 
-  char* colors[COLOR_COUNT] = {
-    "\033[30m", // black
-    "\033[31m", // red
-    "\033[32m", // green
-    "\033[33m", // yellow
-    "\033[34m", // blue
-    "\033[35m", // purple
-    "\033[36m", // cyan
-    "\033[37m"  // white
-  };
+    But it must be a .png or a .bmp file and
+    cannot be bigger than 480x240px
+  */
 
-  srand(time(NULL)); // init random
-
-  printf(colors[rand() % sizeof(colors)]);
-  Brain.Screen.print("Grumio est coquus");
-
-  for (int i = 0; i < COLOR_COUNT; i++) {
-    free(colors[i]);
-  }
+  //Brain.Screen.drawImageFromFile(name, 0, 0);
 }
 
 int main(void) {
@@ -147,7 +137,7 @@ int main(void) {
   Competition.drivercontrol(driver);
   Competition.autonomous(capatalismAtItsPeak);
 
-  random_colors();
+  //display_image("image.png");
 
   return 1; // remove this if code breaks
 }
