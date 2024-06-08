@@ -1,4 +1,5 @@
 
+// standard libs
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -6,17 +7,18 @@
 #include <string.h>
 #include <time.h>
 
-
+// vex api and macros
 #include "vex.h"
 #include "macros.h"
 
 using namespace vex;
 
-// Brain should be defined by default
+// brain should be defined by default
 brain Brain; 
 
 
-// Robot configuration code.
+// robot configuration code
+// this is ugly and hurts my eyes :(
 controller Controller1 = controller(primary);
 motor leftMotorA = motor(PORT11, ratio18_1, false);
 motor leftMotorB = motor(PORT20, ratio18_1, false);
@@ -28,12 +30,18 @@ motor flyWheel = motor(PORT2, ratio18_1, true);
 
 
 // define variable for remote controller enable/disable
-bool RemoteControlCodeEnabled = true;
+// why is this required?
+// vex api docs make no sense
+//bool RemoteControlCodeEnabled = true; //swapfile
 
 
 /*
-  DO NOT TOUCH THE FOLLOWING MOVEMENT FUNCTIONS
-  THEY WILL PROBABLY BREAK
+ * DO NOT TOUCH THE MOVEMENT FUNCTIONS BELLOW
+ * THEY WILL BRAKE
+ *
+ * ^ say thank you to nick for that :)
+ *
+ * can you put the following functions into a class please?
 */
 
 // right move forward
@@ -68,11 +76,13 @@ void l_mb() {
   LeftDriveSmart.stop();
 }
 
+// flywheel start
 void flywheel_spin() {
   flyWheel.setVelocity(FLYWHEEL_RPM, rpm); // set velocity before starting
   flyWheel.spin(reverse);
 }
 
+// flywheel start
 void flywheel_stop() {
   flyWheel.stop();
 }
@@ -101,15 +111,16 @@ void handleFlywheel() {
 void driver() {
 
   // why are these seperate?
+  // this code is redundant
 
   setupDriver(); 
   handleMovement();
   handleFlywheel();
 }
 
-// Automation
-void capatalismAtItsPeak() {
-
+// automation
+// hehe funny name
+void capatalism_at_its_peak() {
   LeftDriveSmart.spin(reverse);
   RightDriveSmart.spin(reverse);
   wait(WAIT_TIME, seconds);
@@ -117,27 +128,15 @@ void capatalismAtItsPeak() {
   RightDriveSmart.stop();
 }
 
-// display image from sd card
-void display_image(string name) {
-  /*
-    Can use this to draw an image to the screen from sd card:
-    Brain.Screen.drawImageFromFile(name, x, y);
 
-    But it must be a .png or a .bmp file and
-    cannot be bigger than 480x240px
-  */
-
-  //Brain.Screen.drawImageFromFile(name, 0, 0);
-}
-
+// main function
 int main(void) {
 
   // setup callbacks for competition
   competition Competition = competition();
   Competition.drivercontrol(driver);
-  Competition.autonomous(capatalismAtItsPeak);
+  Competition.autonomous(capatalism_at_its_peak);
 
-  //display_image("image.png");
-
+  // the code should never hit this return function
   return 1; // remove this if code breaks
 }
