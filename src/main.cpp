@@ -20,11 +20,11 @@ brain Brain;
 // robot configuration code
 // this is ugly and hurts my eyes :(
 controller Controller1 = controller(primary);
-motor leftMotorA = motor(PORT11, ratio18_1, false);
-motor leftMotorB = motor(PORT20, ratio18_1, false);
+motor leftMotorA = motor(PORT11, ratio18_1, true);
+motor leftMotorB = motor(PORT20, ratio18_1, true);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT1, ratio18_1, false);
-motor rightMotorB = motor(PORT10, ratio18_1, false);
+motor rightMotorA = motor(PORT1, ratio18_1, true);
+motor rightMotorB = motor(PORT10, ratio18_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 motor flyWheel = motor(PORT2, ratio18_1, true);
 
@@ -47,7 +47,7 @@ motor flyWheel = motor(PORT2, ratio18_1, true);
 // right move forward
 void r_mf() {
   while (Controller1.ButtonR1.pressing()) {
-    RightDriveSmart.spin(reverse);
+    RightDriveSmart.spin(forward);
   }
   RightDriveSmart.stop();
 }
@@ -55,7 +55,7 @@ void r_mf() {
 // left move forward
 void l_mf() {
   while (Controller1.ButtonL1.pressing()) {
-    LeftDriveSmart.spin(reverse);
+    LeftDriveSmart.spin(forward);
   }
   LeftDriveSmart.stop();
 }
@@ -63,7 +63,7 @@ void l_mf() {
 // right move backward
 void r_mb() {
   while (Controller1.ButtonR2.pressing()) {
-    RightDriveSmart.spin(forward);
+    RightDriveSmart.spin(reverse);
   }
   RightDriveSmart.stop();
 }
@@ -71,7 +71,7 @@ void r_mb() {
 // left move backward
 void l_mb() {
   while (Controller1.ButtonL2.pressing()) {
-    LeftDriveSmart.spin(forward);
+    LeftDriveSmart.spin(reverse);
   } 
   LeftDriveSmart.stop();
 }
@@ -79,7 +79,7 @@ void l_mb() {
 // flywheel start
 void flywheel_spin() {
   flyWheel.setVelocity(FLYWHEEL_RPM, rpm); // set velocity before starting
-  flyWheel.spin(reverse);
+  flyWheel.spin(forward);
 }
 
 // flywheel start
