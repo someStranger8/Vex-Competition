@@ -89,8 +89,8 @@ void flywheel_stop() {
 
 // driver control setup
 void setupDriver() {
-  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent); 
-  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, percent);
+  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm); 
+  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
 }
 
 // map input to movement call back funcs
@@ -141,3 +141,4 @@ int main(void) {
   // the code should never hit this return function
   return 1; // remove this if code breaks
 }
+
