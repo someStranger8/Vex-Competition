@@ -120,6 +120,7 @@ void driver() {
 
 // automation
 // hehe funny name
+// NOTE: We should work on this function
 void capatalism_at_its_peak() {
   LeftDriveSmart.spin(reverse);
   RightDriveSmart.spin(reverse);
