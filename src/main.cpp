@@ -132,14 +132,13 @@ void capatalism_at_its_peak() {
 
 
 // main function
-int main(void) {
+// // the "void" isnt standard
+void main(void) {
 
   // setup callbacks for competition
   competition Competition = competition();
   Competition.drivercontrol(driver);
   Competition.autonomous(capatalism_at_its_peak);
 
-  // the code should never hit this return function
-  return 1; // remove this if code breaks
 }
 
