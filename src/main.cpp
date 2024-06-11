@@ -6,6 +6,7 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
+#include <stdint.h>
 
 // vex api and macros
 #include "vex.h"
