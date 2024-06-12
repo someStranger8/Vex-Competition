@@ -35,6 +35,9 @@ bool flyWheel_is_spinning = false;
 // vex api docs make no sense
 //bool RemoteControlCodeEnabled = true; //swapfile
 
+
+// abort function
+// kills the program
 void kill(void) {
   abort();
 }
