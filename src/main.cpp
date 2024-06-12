@@ -79,7 +79,6 @@ void l_mb() {
 
 // flywheel start
 void flywheel_spin() {
-  flyWheel.setVelocity(FLYWHEEL_RPM, rpm); // set velocity before starting
   flyWheel.spin(forward);
 }
 
@@ -88,35 +87,24 @@ void flywheel_stop() {
   flyWheel.stop();
 }
 
-// driver control setup
-void setupDriver() {
-  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm); 
-  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
-}
-
-// map input to movement call back funcs
-void handleMovement() {
-  Controller1.ButtonL1.pressed(l_mf);
-  Controller1.ButtonR1.pressed(r_mf);
-  Controller1.ButtonL2.pressed(l_mb);
-  Controller1.ButtonR2.pressed(r_mb);
-}
-
-// map input to flywheel call back functions
-void handleFlywheel() {
-  Controller1.ButtonX.pressed(flywheel_spin); // start
-  Controller1.ButtonB.pressed(flywheel_stop); // stop
-}
 
 // driver control callback
 void driver() {
 
-  // why are these seperate?
-  // this code is redundant
+  // setup drivetrain and flywheel
+  RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
+  LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
+  flyWheel.setVelocity(FLYWHEEL_RPM, rpm);
+  
+  // setup movement controls
+  Controller1.ButtonL1.pressed(l_mf);
+  Controller1.ButtonR1.pressed(r_mf);
+  Controller1.ButtonL2.pressed(l_mb);
+  Controller1.ButtonR2.pressed(r_mb);
 
-  setupDriver(); 
-  handleMovement();
-  handleFlywheel();
+  // flywheel controls
+  Controller1.ButtonX.pressed(flywheel_spin);
+  Controller1.ButtonB.pressed(flywheel_stop);
 }
 
 // automation
@@ -139,6 +127,5 @@ void main(void) {
   competition Competition = competition();
   Competition.drivercontrol(driver);
   Competition.autonomous(capatalism_at_its_peak);
-
 }
 
