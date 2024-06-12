@@ -35,6 +35,9 @@ bool flyWheel_is_spinning = false;
 // vex api docs make no sense
 //bool RemoteControlCodeEnabled = true; //swapfile
 
+void kill() {
+  abort();
+}
 
 /*
  * DO NOT TOUCH THE MOVEMENT FUNCTIONS BELLOW
@@ -110,6 +113,9 @@ void driver() {
 
   // flywheel controls
   Controller1.ButtonX.pressed(flywheel_toggle);
+
+  // kill button
+  Controller1.ButtonA.pressed(kill);
 }
 
 // automation
@@ -121,10 +127,6 @@ void capatalism_at_its_peak() {
   wait(WAIT_TIME, seconds);
   LeftDriveSmart.stop();
   RightDriveSmart.stop();
-}
-
-void kill() {
-  abort();
 }
 
 // main function
