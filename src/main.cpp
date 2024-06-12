@@ -35,7 +35,7 @@ bool flyWheel_is_spinning = false;
 // vex api docs make no sense
 //bool RemoteControlCodeEnabled = true; //swapfile
 
-void kill() {
+void kill(void) {
   abort();
 }
 
@@ -49,7 +49,7 @@ void kill() {
 */
 
 // right move forward
-void r_mf() {
+void r_mf(void) {
   while (Controller1.ButtonR1.pressing()) {
     RightDriveSmart.spin(forward);
   }
@@ -57,7 +57,7 @@ void r_mf() {
 }
 
 // left move forward
-void l_mf() {
+void l_mf(void) {
   while (Controller1.ButtonL1.pressing()) {
     LeftDriveSmart.spin(forward);
   }
@@ -65,7 +65,7 @@ void l_mf() {
 }
 
 // right move backward
-void r_mb() {
+void r_mb(void) {
   while (Controller1.ButtonR2.pressing()) {
     RightDriveSmart.spin(reverse);
   }
@@ -73,7 +73,7 @@ void r_mb() {
 }
 
 // left move backward
-void l_mb() {
+void l_mb(void) {
   while (Controller1.ButtonL2.pressing()) {
     LeftDriveSmart.spin(reverse);
   } 
@@ -81,7 +81,7 @@ void l_mb() {
 }
 
 // flywheel start
-void flywheel_toggle() {
+void flywheel_toggle(void) {
   switch (flyWheel_is_spinning) {
     case true:
       flyWheel.stop();
@@ -98,7 +98,7 @@ void flywheel_toggle() {
 
 
 // driver control callback
-void driver() {
+void driver(void) {
 
   // setup drivetrain and flywheel
   RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
@@ -121,7 +121,7 @@ void driver() {
 // automation
 // hehe funny name
 // NOTE: We should work on this function
-void capatalism_at_its_peak() {
+void capatalism_at_its_peak(void) {
   LeftDriveSmart.spin(forward);
   RightDriveSmart.spin(forward);
   wait(WAIT_TIME, seconds);
