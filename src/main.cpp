@@ -28,7 +28,7 @@ motor rightMotorA = motor(PORT1, ratio18_1, true);
 motor rightMotorB = motor(PORT10, ratio18_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 motor flyWheel = motor(PORT2, ratio18_1, true);
-
+bool flyWheel_is_spinning = false;
 
 // define variable for remote controller enable/disable
 // why is this required?
@@ -78,13 +78,16 @@ void l_mb() {
 }
 
 // flywheel start
-void flywheel_spin() {
-  flyWheel.spin(forward);
-}
+void flywheel_toggle() {
+  switch (flyWheel_is_spinning) {
+    case true:
+      flyWheel.stop();
+      flyWheel_is_spinning = false;
 
-// flywheel start
-void flywheel_stop() {
-  flyWheel.stop();
+    case false:
+      flyWheel.spin(forward);
+      flyWheel_is_spinning = true;
+  }
 }
 
 
@@ -103,8 +106,7 @@ void driver() {
   Controller1.ButtonR2.pressed(r_mb);
 
   // flywheel controls
-  Controller1.ButtonX.pressed(flywheel_spin);
-  Controller1.ButtonB.pressed(flywheel_stop);
+  Controller1.ButtonX.pressed(flywheel_toggle);
 }
 
 // automation
