@@ -87,6 +87,9 @@ void flywheel_toggle() {
     case false:
       flyWheel.spin(forward);
       flyWheel_is_spinning = true;
+
+    default:
+      kill();
   }
 }
 
@@ -120,6 +123,9 @@ void capatalism_at_its_peak() {
   RightDriveSmart.stop();
 }
 
+void kill() {
+  abort();
+}
 
 // main function
 // // the "void" isnt standard
