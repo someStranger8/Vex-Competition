@@ -111,8 +111,8 @@ void driver() {
 // hehe funny name
 // NOTE: We should work on this function
 void capatalism_at_its_peak() {
-  LeftDriveSmart.spin(reverse);
-  RightDriveSmart.spin(reverse);
+  LeftDriveSmart.spin(forward);
+  RightDriveSmart.spin(forward);
   wait(WAIT_TIME, seconds);
   LeftDriveSmart.stop();
   RightDriveSmart.stop();
