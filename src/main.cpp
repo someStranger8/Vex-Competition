@@ -95,7 +95,7 @@ void flywheel_toggle(void) {
       flyWheel_is_spinning = true;
 
     default:
-      kill();
+      kill(); // have the program kill its self
   }
 }
 
