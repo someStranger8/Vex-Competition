@@ -42,14 +42,6 @@ void kill(void) {
   abort();
 }
 
-/*
- * DO NOT TOUCH THE MOVEMENT FUNCTIONS BELLOW
- * THEY WILL BRAKE
- *
- * ^ say thank you to nick for that :)
- *
- * can you put the following functions into a class please?
-*/
 
 // right move forward
 void r_mf(void) {
