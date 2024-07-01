@@ -18,23 +18,27 @@ using namespace vex;
 brain Brain; 
 
 
-// robot configuration code
-// this is ugly and hurts my eyes :(
+// setup controller
 controller Controller1 = controller(primary);
+//bool RemoteControlCodeEnabled = true; // uncomment if necessary
+
+// left drive train
 motor leftMotorA = motor(PORT11, ratio18_1, true);
 motor leftMotorB = motor(PORT20, ratio18_1, true);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
+
+// right drive train
 motor rightMotorA = motor(PORT1, ratio18_1, true);
 motor rightMotorB = motor(PORT10, ratio18_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
+
+// setup flywheel
 motor flyWheel = motor(PORT2, ratio18_1, true);
 bool flyWheel_is_spinning = false;
 
-// define variable for remote controller enable/disable
-// why is this required?
-// vex api docs make no sense
-//bool RemoteControlCodeEnabled = true; //swapfile
-
+// vinyl record
+motor vinyl = motor(PORT21, ratio18_1, true);
+bool vinyl_is_spinning = false;
 
 // abort function
 // kills the program
@@ -91,14 +95,30 @@ void flywheel_toggle(void) {
   }
 }
 
+// vinyl toggle
+void vinyl_toggle(void) {
+  switch (vinyl_is_spinning) {
+    case true:
+      vinyl.stop();
+      vinyl_is_spinning = false;
+
+    case false:
+      vinyl.spin(forward);
+      vinyl_is_spinning = true;
+
+    default:
+      kill(); // if we hit this somethings wrong
+  }
+}
 
 // driver control callback
 void driver(void) {
 
-  // setup drivetrain and flywheel
+  // setup drivetrain, flywheel, and vinyl
   RightDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
   LeftDriveSmart.setVelocity(DRIVETRAIN_SPEED, rpm);
   flyWheel.setVelocity(FLYWHEEL_RPM, rpm);
+  vinyl.setVelocity(VINYL_RPM, rpm);
   
   // setup movement controls
   Controller1.ButtonL1.pressed(l_mf);
@@ -108,6 +128,7 @@ void driver(void) {
 
   // flywheel controls
   Controller1.ButtonX.pressed(flywheel_toggle);
+  Controller1.ButtonY.pressed(vinyl_toggle);
 
   // kill button
   Controller1.ButtonA.pressed(kill);
